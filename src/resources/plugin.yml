@@ -1,15 +1,15 @@
-name: Factions
+name: Leagues
 version: "${pom.version}"
 api: ["1.0.0"]
 main: com.massivecraft.factions.P
 authors: [Olof Larsson, Brett Flannigan]
 commands:
   factions:
-    description: Reference command for Factions
+    description: Reference command for Leagues
     aliases: [f]
 permissions:
   factions.kit.admin:
-    description: All faction permissions
+    description: All league permissions
     children:
       factions.kit.mod: true
       factions.config: true
