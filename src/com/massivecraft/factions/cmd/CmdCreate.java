@@ -32,7 +32,7 @@ public class CmdCreate extends FCommand {
         String tag = this.argAsString(0);
 
         if (fme.hasFaction()) {
-            msg("<b>You must leave your current faction first.");
+            msg("<b>You must leave your current league first.");
             return;
         }
 
@@ -48,7 +48,7 @@ public class CmdCreate extends FCommand {
         }
 
         // if economy is enabled, they're not on the bypass list, and this command has a cost set, make sure they can pay
-        if (!canAffordCommand(Conf.econCostCreate, "to create a new faction")) return;
+        if (!canAffordCommand(Conf.econCostCreate, "to create a new league")) return;
 
         // trigger the faction creation event (cancellable)
         FactionCreateEvent createEvent = new FactionCreateEvent(me, tag);
@@ -56,13 +56,13 @@ public class CmdCreate extends FCommand {
         if (createEvent.isCancelled()) return;
 
         // then make 'em pay (if applicable)
-        if (!payForCommand(Conf.econCostCreate, "to create a new faction", "for creating a new faction")) return;
+        if (!payForCommand(Conf.econCostCreate, "to create a new league", "for creating a new league")) return;
 
         Faction faction = Factions.i.create();
 
         // TODO: Why would this even happen??? Auto increment clash??
         if (faction == null) {
-            msg("<b>There was an internal error while trying to create your faction. Please try again.");
+            msg("<b>There was an internal error while trying to create your league. Please try again.");
             return;
         }
 
@@ -79,13 +79,13 @@ public class CmdCreate extends FCommand {
         fme.setFaction(faction);
 
         for (FPlayer follower : FPlayers.i.getOnline()) {
-            follower.msg("%s<i> created a new faction %s", fme.describeTo(follower, true), faction.getTag(follower));
+            follower.msg("%s<i> created a new leagye %s", fme.describeTo(follower, true), faction.getTag(follower));
         }
 
         msg("<i>You should now: %s", p.cmdBase.cmdDescription.getUseageTemplate());
 
         if (Conf.logFactionCreate)
-            P.p.log(fme.getName() + " created a new faction: " + tag);
+            P.p.log(fme.getName() + " created a new league: " + tag);
     }
 
 }
